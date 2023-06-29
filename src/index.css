@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@supports not (font-variation-settings: normal) {
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url('/fonts/static/JetBrainsMono-Bold.ttf');
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url('/fonts/static/JetBrainsMono-BoldItalic.ttf');
+    font-weight: bold;
+    font-style: italic;
+  }
+}
+
+@supports (font-variation-settings: normal) {
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url('/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype-variations');
+    font-weight: 100 1000;
+  }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url('/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype-variations');
+    font-weight: 100 1000;
+    font-style: italic;
+  }
+}
+
+html {
+  font-family: "JetBrains Mono";
+  font-weight: bold;
+}
