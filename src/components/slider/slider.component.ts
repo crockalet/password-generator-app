@@ -17,8 +17,6 @@ export class Slider extends TailwindElement(styles) {
     this.value = parseInt((e.target as HTMLInputElement).value);
   }
 
-  
-
   render() {
     return html`
       <div class="w-full">
