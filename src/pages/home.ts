@@ -10,6 +10,7 @@ import "../components/slider/slider.component";
 import "../components/password-strength/password-strength.component";
 import "../components/checkbox/checkbox.component"
 import "../components/button/button.component"
+import "../components/input/input.component"
 
 @customElement("home-page")
 export class Home extends TailwindElement(styles) {
@@ -35,7 +36,7 @@ export class Home extends TailwindElement(styles) {
           Strength Generate
         </p> -->
 
-        <div class="w-full min-h-screen flex justify-center items-center">
+        <div class="w-full p-8 flex justify-center items-center">
           <div class="w-[33.75rem] bg-dark-gray p-4">
             <app-slider> </app-slider>
             
@@ -56,6 +57,12 @@ export class Home extends TailwindElement(styles) {
             <button @click=${this._changeStrength} class="mt-8 w-full bg-almost-white text-dark-gray p-4">
               Test
             </button>
+          </div>
+        </div>
+
+        <div class="w-[33.75rem] mx-auto p-4">
+          <div class="mt-8">
+            <app-input placeholder="P4$5W0rD!"></app-input>
           </div>
         </div>
       </div>

@@ -1,4 +1,9 @@
 @tailwind base;
+
+::selection {
+  @apply bg-neon-green/80 text-dark-gray;
+}
+
 @tailwind components;
 @tailwind utilities;
 
