@@ -4,9 +4,11 @@ import { TailwindElement } from "../shared/tailwind.element";
 
 import styles from "../shared/tailwind.global.css";
 
+import { Strength } from "enums/Strength";
+
 import "../components/slider/slider.component";
 import "../components/password-strength/password-strength.component";
-import { Strength } from "enums/Strength";
+import "../components/checkbox/checkbox.component"
 
 @customElement("home-page")
 export class Home extends TailwindElement(styles) {
@@ -39,6 +41,11 @@ export class Home extends TailwindElement(styles) {
             <div class="mt-8">
               <password-strength .value=${this.value}>
               </password-strength>
+            </div>
+
+            <div class="mt-8">
+              <app-checkbox label="Include Uppercase Letters" checked disabled></app-checkbox>
+              <app-checkbox label="Include Lowercase Letters"></app-checkbox>
             </div>
 
             <button @click=${this._changeStrength} class="mt-8 w-full bg-almost-white text-dark-gray p-4">
