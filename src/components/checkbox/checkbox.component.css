@@ -1,0 +1,4 @@
+input[type="checkbox"] {
+  @apply appearance-none m-0;
+  @apply w-5 h-5 border-2 border-almost-white grid place-content-center;
+}
