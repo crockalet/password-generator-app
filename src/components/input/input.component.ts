@@ -4,7 +4,6 @@ import { TailwindElement } from '../../shared/tailwind.element';
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 
 import style from './input.component.css?inline'
-import { debounce } from '../../helpers/debounce';
 
 @customElement('app-input')
 export class Input extends TailwindElement(style) {
@@ -18,18 +17,24 @@ export class Input extends TailwindElement(style) {
   }
 
   _handleInput(e: Event) {
-    this.value = (e.target as HTMLInputElement).value;
+    this.dispatchEvent(
+      new CustomEvent(
+        'change-input',
+        { detail: (e.target as HTMLInputElement).value }
+      )
+    )
   }
 
   render() {
     return html`
-      <div @click=${this.focus} class="flex items-center justify-between cursor-text bg-dark-gray py-4 px-8">
+      <div @click=${this.focus} class="flex items-center justify-between cursor-text bg-dark-gray py-4 px-8 w-full">
         <input
           ${ref(this.inputRef)} 
           type="text" 
           .placeholder=${this.placeholder ?? ""} 
           .value=${this.value ?? ''}
           @input=${this._handleInput}
+          class="w-full"
         />
 
         <slot name="suffix"></slot>

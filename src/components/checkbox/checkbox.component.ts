@@ -16,12 +16,13 @@ export class Checkbox extends TailwindElement(style) {
 
   render() {
     return html`
-      <div @click=${this._handleClick} class="flex items-center gap-x-6">
+      <div @click=${this._handleClick} role="checkbox" .aria-checked=${this.checked}
+        class="flex items-center gap-x-6 hover:cursor-pointe group/checkbox">
         <div class="relative">
             <input type="checkbox"
               .checked=${this.checked}
               .name=${this.name}
-              .id=${this.name} />
+              .id=${this.name} class="hover:cursor-pointer" />
 
             <svg class="bg-neon-green text-dark-gray absolute inset-0 pointer-events-none transition-all will-change-transform ease-out ${this.checked ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}" 
               viewBox="0 0 20 20" fill="none">
@@ -29,8 +30,8 @@ export class Checkbox extends TailwindElement(style) {
             </svg>
         </div>
 
-        <label .for=${this.name} class="text-almost-white">${this.label}</label>
-  </div>
+        <label .for=${this.name} class="text-almost-white hover:cursor-pointer">${this.label}</label>
+      </div>
     `;
   }
 }

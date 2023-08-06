@@ -21,18 +21,18 @@ export class PasswordStrength extends TailwindElement(styles) {
       <div class="flex justify-between items-center">
         <p class="uppercase text-grey">Strength</p>
 
-        <div class="flex gap-x-4">
+        <div class="flex items-center gap-x-4">
           <p class="uppercase text-almost-white">${STRENGTH_LABEL[this.value]}</p>
 
-          <div class="flex gap-x-2 relative">
+          <div class="flex gap-x-2 items-stretch relative">
             ${[...Array(4).keys()].map((_, i) => 
-              html`<div class="h-full w-[10px] border-2 border-almost-white"></div>`
+              html`<div class="h-[28px] w-[10px] border-2 border-almost-white"></div>`
             )}
 
-            <div class="bar absolute inset-0 bg-slate-600 transition-[width,background-color] ease-in ${this.value}"></div>
+            <div class="bar ${this.value} h-[28px] bg-clip-border absolute inset-0 bg-slate-600 transition-[width,background-color] ease-in"></div>
           </div>
 
-          <svg width="0" height="0">
+          <svg width="0" height="0" class="sr-only">
             <defs>
               <clipPath id="clip-path">
                 <rect x="0" width="10.5" height="28" />
