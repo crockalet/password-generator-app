@@ -11,7 +11,14 @@ export class Checkbox extends TailwindElement(style) {
   @property({ type: Boolean }) disabled: boolean = false;
 
   _handleClick() {
-    this.checked = !this.checked;
+    if (!this.disabled) {
+      this.dispatchEvent(
+        new CustomEvent(
+          'change-checkbox',
+          { detail: !this.checked }
+        )
+      )
+    }
   }
 
   render() {
