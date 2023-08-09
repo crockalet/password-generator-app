@@ -32,6 +32,11 @@ export class Home extends TailwindElement(styles) {
     });
   }
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.generatePassword();
+  }
+
   render() {
     return html`
       <div
