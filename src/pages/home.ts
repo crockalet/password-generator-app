@@ -39,7 +39,7 @@ export class Home extends TailwindElement(styles) {
 
   render() {
     return html`
-      <div
+      <main
         class="w-full min-h-screen bg-very-dark-gray text-almost-white md:text-body"
       >
         <div
@@ -112,7 +112,7 @@ export class Home extends TailwindElement(styles) {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     `;
   }
 }
