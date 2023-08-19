@@ -24,8 +24,7 @@ export class Checkbox extends TailwindElement(style) {
 
   render() {
     return html`
-      <div @click=${this._handleClick} role="checkbox" aria-checked=${this.checked}
-        class="flex items-center gap-x-6 hover:cursor-pointer group/checkbox">
+      <div @click=${this._handleClick} class="flex items-center gap-x-6 hover:cursor-pointer group/checkbox">
         <div class="relative">
             <input type="checkbox"
               .checked=${this.checked}
