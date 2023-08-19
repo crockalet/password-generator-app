@@ -51,8 +51,13 @@ export class PasswordGeneratorController implements ReactiveController {
     this.host.requestUpdate();
   }
 
-  copyPassword() {
-    navigator.clipboard.writeText(this.password);
+  copyPassword(callbacks?: { onSuccess: () => void; onError: () => void }) {
+    navigator.clipboard
+      .writeText(this.password)
+      .then(
+        () => { callbacks?.onSuccess() },
+        () => { callbacks?.onError() }
+      );
   }
 
   async loadZxcvbnOptions(): Promise<OptionsType> {
