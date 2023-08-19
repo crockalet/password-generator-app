@@ -1,5 +1,6 @@
-import { PasswordStrength } from "components/password-strength/password-strength.component";
+import { OptionsType, Score, zxcvbn, zxcvbnOptions } from "@zxcvbn-ts/core";
 import { Strength } from "enums/Strength";
+import { generate } from "generate-password-browser";
 import { ReactiveController, ReactiveControllerHost } from "lit";
 
 export interface PasswordGeneratorOptions {
@@ -10,7 +11,7 @@ export interface PasswordGeneratorOptions {
   includeSymbols: boolean;
 }
 
-const strengths: Record<number, Strength> = {
+const strengths: Record<Score, Strength> = {
   0: "too_weak",
   1: "too_weak",
   2: "weak",
@@ -36,32 +37,16 @@ export class PasswordGeneratorController implements ReactiveController {
     const includeNumbers = options?.includeNumbers ?? true;
     const includeSymbols = options?.includeSymbols ?? true;
 
-    const lowercase = "abcdefghijklmnopqrstuvwxyz";
-    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numbers = "0123456789";
-    const symbols = "!@#$%^&*()_+=";
-
-    let chars = "";
-    if (includeLowercase) {
-      chars += lowercase;
-    }
-    if (includeUppercase) {
-      chars += uppercase;
-    }
-    if (includeNumbers) {
-      chars += numbers;
-    }
-    if (includeSymbols) {
-      chars += symbols;
-    }
-
-    let password = "";
-    for (let i = 0; i < length; i++) {
-      password += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
+    const password = generate({
+      length: length,
+      numbers: includeNumbers,
+      symbols: includeSymbols,
+      lowercase: includeLowercase,
+      uppercase: includeUppercase,
+    });
 
     this.password = password;
-    this.strength = this.calculateStrength();
+    this.calculateStrength();
 
     this.host.requestUpdate();
   }
@@ -70,25 +55,33 @@ export class PasswordGeneratorController implements ReactiveController {
     navigator.clipboard.writeText(this.password);
   }
 
-  calculateStrength(): Strength {
-    let strength = 0;
+  async loadZxcvbnOptions(): Promise<OptionsType> {
+    const zxcvbnCommonPackage = await import(
+      /* webpackChunkName: "zxcvbnCommonPackage" */ '@zxcvbn-ts/language-common'
+    )
+    const zxcvbnEnPackage = await import(
+      /* webpackChunkName: "zxcvbnEnPackage" */ '@zxcvbn-ts/language-en'
+    )
 
-    if (this.password.length >= 8) {
-      strength++;
+    return{
+      translations: zxcvbnEnPackage.translations,
+      graphs: zxcvbnCommonPackage.adjacencyGraphs,
+      dictionary: {
+        ...zxcvbnCommonPackage.dictionary,
+        ...zxcvbnEnPackage.dictionary,
+      },
     }
+  }
 
-    if (this.password.match(/[a-z][A-Z]+/)) {
-      strength++;
-    }
+  async calculateStrength(): Promise<void> {
+    const options = await this.loadZxcvbnOptions();
 
-    if (this.password.match(/[0-9]+/)) {
-      strength++;
-    }
+    zxcvbnOptions.setOptions(options);
 
-    if (this.password.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/)) {
-      strength++;
-    }
+    const result = zxcvbn(this.password);
 
-    return strengths[strength];
+    this.strength = strengths[result.score];
+
+    this.host.requestUpdate();
   }
 }
