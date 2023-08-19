@@ -45,7 +45,7 @@ export class Home extends TailwindElement(styles) {
         <div
           class="w-full max-w-[33.75rem] mx-auto p-4 flex flex-col gap-y-4 md:gap-y-6 justify-center items-center min-h-screen"
         >
-          <p class="md:text-heading-m text-grey">Password Generator</p>
+          <h1 class="md:text-heading-m text-grey">Password Generator</h1>
 
           <div class="w-full">
             <app-input
