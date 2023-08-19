@@ -64,6 +64,7 @@ export class Home extends TailwindElement(styles) {
             <div class="mt-8 flex flex-col gap-y-5">
               <app-checkbox
                 label="Include Uppercase Letters"
+                name="includeUppercase"
                 .checked=${this.includeUppercase}
                 @change-checkbox=${(e: CustomEvent) =>
                   (this.includeUppercase = e.detail)}
@@ -71,6 +72,7 @@ export class Home extends TailwindElement(styles) {
               </app-checkbox>
               <app-checkbox
                 label="Include Lowercase Letters"
+                name="includeLowercase"
                 .checked=${this.includeLowercase}
                 @change-checkbox=${(e: CustomEvent) =>
                   (this.includeLowercase = e.detail)}
@@ -78,6 +80,7 @@ export class Home extends TailwindElement(styles) {
               </app-checkbox>
               <app-checkbox
                 label="Include Numbers"
+                name="includeNumbers"
                 .checked=${this.includeNumbers}
                 @change-checkbox=${(e: CustomEvent) =>
                   (this.includeNumbers = e.detail)}
@@ -85,6 +88,7 @@ export class Home extends TailwindElement(styles) {
               </app-checkbox>
               <app-checkbox
                 label="Include Symbols"
+                name="includeSymbols"
                 .checked=${this.includeSymbols}
                 @change-checkbox=${(e: CustomEvent) =>
                   (this.includeSymbols = e.detail)}
