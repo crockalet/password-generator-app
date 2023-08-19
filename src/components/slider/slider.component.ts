@@ -14,7 +14,11 @@ export class Slider extends TailwindElement(styles) {
   inputRef: Ref<HTMLInputElement> = createRef();
 
   updateValue(e: Event) {
-    this.value = parseInt((e.target as HTMLInputElement).value);
+    this.dispatchEvent(
+      new CustomEvent("change-slider", {
+        detail: parseInt((e.target as HTMLInputElement).value),
+      })
+    );
   }
 
   render() {

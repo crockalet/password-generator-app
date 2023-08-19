@@ -9,6 +9,7 @@ import style from './input.component.css?inline'
 export class Input extends TailwindElement(style) {
   @property({ type: String }) placeholder: string;
   @property({ type: String }) value: string;
+  @property({ type: Boolean }) disabled: boolean = false;
 
   inputRef: Ref<HTMLInputElement> = createRef();
 
@@ -31,6 +32,7 @@ export class Input extends TailwindElement(style) {
         <input
           ${ref(this.inputRef)} 
           type="text" 
+          .disabled=${this.disabled}
           .placeholder=${this.placeholder ?? ""} 
           .value=${this.value ?? ''}
           @input=${this._handleInput}
