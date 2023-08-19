@@ -1,0 +1,15 @@
+.notification {
+  @apply fixed top-0 right-0 mt-4 mr-4 px-4 py-3 bg-dark-gray;
+}
+
+.notification.neutral {
+  @apply text-white;
+}
+
+.notification.success {
+  @apply text-neon-green;
+}
+
+.notification.error {
+  @apply text-1-red;
+}
