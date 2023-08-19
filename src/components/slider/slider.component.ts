@@ -10,6 +10,8 @@ export class Slider extends TailwindElement(styles) {
   @property({ type: Number }) value: number = 50;
   @property({ type: Number }) min: number = 0;
   @property({ type: Number }) max: number = 100;
+  @property({ type: String }) label: string = "Slider";
+  @property({ type: String }) name: string = "slider";
 
   inputRef: Ref<HTMLInputElement> = createRef();
 
@@ -37,7 +39,10 @@ export class Slider extends TailwindElement(styles) {
           type="range"
           @input=${this.updateValue}
           class="slider w-full mt-4"
+          .id=${this.name}
         />
+
+        <label for=${this.name} class="sr-only">${this.label}</label>
       </div>
     `;
   }
